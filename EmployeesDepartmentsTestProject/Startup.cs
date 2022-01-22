@@ -1,16 +1,12 @@
+using EmployeesDepartments.DataAccess;
+using EmployeesDepartments.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeesDepartmentsTestProject
 {
@@ -32,6 +28,38 @@ namespace EmployeesDepartmentsTestProject
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeesDepartmentsTestProject", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: Configuration.GetValue<string>("CORS:Name"),
+                                  builder =>
+                                  {
+                                      builder.WithOrigins(Configuration.GetValue<string[]>("CORS:AllowedHosts"))
+                                             .AllowAnyHeader()
+                                             .AllowAnyMethod();
+                                  });
+            });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            #region Dapper
+
+            //services.AddScoped<DapperDbContext>(provider => new DapperDbContext("parameterString", ActivatorUtilities.CreateInstance<IConfiguration>(provider, "")));
+            //services.AddScoped<DapperDbContext>();
+            //services.AddTransient<IDapperDbHelper, DapperDbHelper>();
+
+            //services.AddTransient<IEmployeeRepository, DREmployeeRepository>();
+            //services.AddTransient<IDepartmentRepository, DRDepartmentRepository>();
+
+            #endregion
+
+            #region EF
+
+            services.AddDbContext<EFDbContext>();
+            services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
+            services.AddTransient<IDepartmentRepository, EFDepartmentRepository>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +82,8 @@ namespace EmployeesDepartmentsTestProject
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors(Configuration.GetValue<string>("CORS:Name"));
         }
     }
 }
