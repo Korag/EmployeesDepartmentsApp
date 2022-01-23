@@ -7,7 +7,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
     public interface IEmployeeRepository
     {
         Task<EmployeeModel> GetEmployeeByIdAsync(int employeeId);
-        Task<ICollection<EmployeeModel>> GetEmployesGroupByIdsAsync(ICollection<int> employeesIds);
+        Task<ICollection<EmployeeModel>> GetEmployeesGroupByIdsAsync(ICollection<int> employeesIds);
         Task<ICollection<EmployeeModel>> GetEmployeesAsync();
 
         Task<int> AddEmployeeAsync(EmployeeModel newEmployee);

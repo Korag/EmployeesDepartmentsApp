@@ -37,5 +37,16 @@ namespace EmployeesDepartments.DataAccess
                 await conn.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async Task<int> SaveDataGetId<T>(
+         string storedProcedureName,
+         T parameters,
+         string connectionStringName = "Default")
+        {
+            using (IDbConnection conn = new SqlConnection(_config.GetConnectionString(connectionStringName)))
+            {
+                return await conn.QuerySingleAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

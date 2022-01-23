@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="DataTransferObjects\" />
-    <Folder Include="MapperProfiles\" />
   </ItemGroup>
 
   <ItemGroup>

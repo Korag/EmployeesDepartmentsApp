@@ -2,41 +2,53 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeesDepartments.DataAccess.Repositories
 {
     public class DRDepartmentEmployeeRepository : IDepartmentEmployeeRepository
     {
-        public DRDepartmentEmployeeRepository()
+        private IDapperDbContext _context;
+
+        public DRDepartmentEmployeeRepository(IDapperDbContext context)
         {
-                
+            _context = context;
         }
 
         public void AssignEmployeeToDepartment(DepartmentEmployeeModel departmentEmployee)
         {
-            throw new NotImplementedException();
+            _context.SaveData<DepartmentEmployeeModel>("dbo.spDepartmentEmployee_Insert", departmentEmployee);
         }
 
         public bool CheckIfUserBelongsToDepartment(int employeeId, int departmentId)
         {
-            throw new NotImplementedException();
+            var employeeDepartments = GetEmployeesDepartmentsAsync(employeeId).Result.ToList().Select(z => z.DepartmentId);
+
+            if (employeeDepartments.Contains(departmentId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentNameAsync(string departmentName)
+        public async Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentNameAsync(string departmentName)
         {
-            throw new NotImplementedException();
+            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spDepartmentEmployee_GetByDepartmentName", new { name = departmentName });
+            return results.ToList();
         }
 
-        public Task<ICollection<DepartmentModel>> GetEmployeesDepartmentsAsync(int employeeId)
+        public async Task<ICollection<DepartmentModel>> GetEmployeesDepartmentsAsync(int employeeId)
         {
-            throw new NotImplementedException();
+            var results = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartmentEmployee_GetByEmployeeId", new { id = employeeId });
+            return results.ToList();
         }
 
         public void RemoveEmployeeFromDepartment(DepartmentEmployeeModel departmentEmployee)
         {
-            throw new NotImplementedException();
+            _context.SaveData<DepartmentEmployeeModel>("dbo.spDepartmentEmployee_Delete", departmentEmployee);
         }
     }
 }

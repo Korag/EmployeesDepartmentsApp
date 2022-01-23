@@ -1,9 +1,7 @@
 ﻿using EmployeesDepartments.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeesDepartments.DataAccess.Repositories
@@ -41,7 +39,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
             return await _context.Employees.ToListAsync();
         }
 
-        public async Task<ICollection<EmployeeModel>> GetEmployesGroupByIdsAsync(ICollection<int> employeesIds)
+        public async Task<ICollection<EmployeeModel>> GetEmployeesGroupByIdsAsync(ICollection<int> employeesIds)
         {
             return await _context.Employees.Where(z => employeesIds.Contains(z.EmployeeId)).ToListAsync();
         }
