@@ -33,7 +33,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public async Task<EmployeeModel> GetEmployeeByIdAsync(int employeeId)
         {
-            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spEmployee_GetById", new { id = employeeId });
+            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spEmployee_GetById", new { employeeId = employeeId });
             return results.ToList().FirstOrDefault();
         }
 
@@ -49,7 +49,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
             foreach (var employeeId in employeesIds)
             {
-                var result = await _context.LoadData<EmployeeModel, dynamic>("dbo.spEmployee_Get", new { Id = employeeId });
+                var result = await _context.LoadData<EmployeeModel, dynamic>("dbo.spEmployee_Get", new { });
                 var employee = result.ToList().FirstOrDefault();
 
                 if (employee != null)
@@ -63,7 +63,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public void RemoveEmployee(EmployeeModel employee)
         {
-            _context.SaveData("dbo.spEmployee_Remove", new { Id = employee.EmployeeId });
+            _context.SaveData("dbo.spEmployee_Remove", new { employeeId = employee.EmployeeId });
         }
 
         public void UpdateEmployee(EmployeeModel updatedEmployee)

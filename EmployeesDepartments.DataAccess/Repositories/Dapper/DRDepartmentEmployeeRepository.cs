@@ -36,13 +36,13 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public async Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentNameAsync(string departmentName)
         {
-            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spDepartmentEmployee_GetByDepartmentName", new { name = departmentName });
+            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spDepartmentEmployee_GetByDepartmentName", new { departmentName = departmentName });
             return results.ToList();
         }
 
         public async Task<ICollection<DepartmentModel>> GetEmployeesDepartmentsAsync(int employeeId)
         {
-            var results = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartmentEmployee_GetByEmployeeId", new { id = employeeId });
+            var results = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartmentEmployee_GetByEmployeeId", new { employeeId = employeeId });
             return results.ToList();
         }
 

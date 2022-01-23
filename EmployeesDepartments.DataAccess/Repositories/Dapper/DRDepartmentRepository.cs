@@ -34,7 +34,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public async Task<DepartmentModel> GetDepartmentByIdAsync(int departmentId)
         {
-            var results = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartment_GetById", new { id = departmentId });
+            var results = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartment_GetById", new { departmentId = departmentId });
             return results.ToList().FirstOrDefault();
         }
 
@@ -50,7 +50,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
             foreach (var departmentId in departmentsIds)
             {
-                var result = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartment_Get", new { Id = departmentId });
+                var result = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartment_Get", new { });
                 var department = result.ToList().FirstOrDefault();
 
                 if (department != null)
@@ -64,7 +64,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public void RemoveDepartment(DepartmentModel department)
         {
-            _context.SaveData("dbo.spDepartment_Remove", new { Id = department.DepartmentId });
+            _context.SaveData("dbo.spDepartment_Remove", new { departmentId = department.DepartmentId });
         }
 
         public void UpdateDepartment(DepartmentModel updatedDepartment)
