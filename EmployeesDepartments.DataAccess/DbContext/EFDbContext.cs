@@ -1,11 +1,6 @@
 ﻿using EmployeesDepartments.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeesDepartments.DataAccess
 {
@@ -18,7 +13,6 @@ namespace EmployeesDepartments.DataAccess
         public DbSet<DepartmentEmployeeModel> DepartmentEmployees { get; set; }
 
         #endregion
-
 
         private IConfiguration _config { get; set; }
 

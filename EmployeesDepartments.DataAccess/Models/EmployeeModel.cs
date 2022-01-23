@@ -9,7 +9,7 @@ namespace EmployeesDepartments.DataAccess.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength = 2)]
