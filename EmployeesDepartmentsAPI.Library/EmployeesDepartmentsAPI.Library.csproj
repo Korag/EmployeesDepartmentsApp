@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DataTransferObjects\" />
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <ProjectReference Include="..\EmployeesDepartments.DataAccess\EmployeesDepartments.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

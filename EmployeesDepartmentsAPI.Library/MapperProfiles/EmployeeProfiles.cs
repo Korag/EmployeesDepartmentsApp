@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EmployeesDepartments.DataAccess.Models;
+using EmployeesDepartmentsAPI.Library.DataTransferObjects;
 
 namespace EmployeesDepartmentsAPI.Library.MapperProfiles
 {
@@ -6,7 +8,9 @@ namespace EmployeesDepartmentsAPI.Library.MapperProfiles
     {
         public EmployeeProfiles()
         {
-            //CreateMap<User, UserDto>();
+            CreateMap<EmployeeModel, EmployeeDto>();
+            CreateMap<UpdateEmployeeDto, EmployeeModel>();
+            CreateMap<CreateEmployeeDto, EmployeeModel>();
         }
     }
 }
