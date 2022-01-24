@@ -6,7 +6,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 {
     public interface IDepartmentEmployeeRepository
     {
-        Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentNameAsync(string departmentName);
+        Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentIdAsync(int departmentId);
         Task<ICollection<DepartmentModel>> GetEmployeesDepartmentsAsync(int employeeId);
 
         void AssignEmployeeToDepartment(DepartmentEmployeeModel departmentEmployee);

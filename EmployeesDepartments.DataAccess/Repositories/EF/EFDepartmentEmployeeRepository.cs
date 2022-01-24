@@ -33,13 +33,13 @@ namespace EmployeesDepartments.DataAccess.Repositories
             }
         }
 
-        public async Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentNameAsync(string departmentName)
+        public async Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentIdAsync(int departmentId)
         {
             //var departmentId = _context.Departments.Where(z => z.Name == departmentName).FirstOrDefault().DepartmentId;
             //var employeesIds = _context.DepartmentEmployees.Where(z => z.DepartmentId == departmentId).Select(x => x.EmployeeId).ToList();
             //return await _context.Employees.Where(z => employeesIds.Contains(z.EmployeeId)).ToListAsync();
 
-            return await _context.DepartmentEmployees.Include(z => z.Department).Include(z => z.Employee).Where(z => z.Department.Name == departmentName).Select(z => z.Employee).ToListAsync();
+            return await _context.DepartmentEmployees.Include(z => z.Department).Include(z => z.Employee).Where(z => z.Department.DepartmentId == departmentId).Select(z => z.Employee).ToListAsync();
         }
 
         public async Task<ICollection<DepartmentModel>> GetEmployeesDepartmentsAsync(int employeeId)

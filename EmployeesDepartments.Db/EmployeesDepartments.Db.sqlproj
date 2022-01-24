@@ -77,7 +77,7 @@
     <Build Include="dbo\StoredProcedures\spDepartment_Update.sql" />
     <Build Include="dbo\StoredProcedures\spDepartmentEmployee_Insert.sql" />
     <Build Include="dbo\StoredProcedures\spDepartmentEmployee_Delete.sql" />
-    <Build Include="dbo\StoredProcedures\spDepartmentEmployee_GetByDepartmentName.sql" />
+    <Build Include="dbo\StoredProcedures\spDepartmentEmployee_GetByDepartmentId.sql" />
     <Build Include="dbo\StoredProcedures\spDepartmentEmployee_GetByEmployeeId.sql" />
   </ItemGroup>
   <ItemGroup>

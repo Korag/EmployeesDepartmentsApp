@@ -34,9 +34,9 @@ namespace EmployeesDepartments.DataAccess.Repositories
             }
         }
 
-        public async Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentNameAsync(string departmentName)
+        public async Task<ICollection<EmployeeModel>> GetEmployeesByDepartmentIdAsync(int departmentId)
         {
-            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spDepartmentEmployee_GetByDepartmentName", new { departmentName = departmentName });
+            var results = await _context.LoadData<EmployeeModel, dynamic>("dbo.spDepartmentEmployee_GetByDepartmentId", new { departmentId = departmentId });
             return results.ToList();
         }
 
