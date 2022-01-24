@@ -34,7 +34,7 @@ namespace EmployeesDepartmentsTestProject
                 options.AddPolicy(name: Configuration.GetValue<string>("CORS:Name"),
                                   builder =>
                                   {
-                                      builder.WithOrigins(Configuration.GetValue<string[]>("CORS:AllowedHosts"))
+                                      builder.WithOrigins(Configuration.GetSection("CORS").GetSection("AllowedOrigins").Get<string[]>())
                                              .AllowAnyHeader()
                                              .AllowAnyMethod();
                                   });
