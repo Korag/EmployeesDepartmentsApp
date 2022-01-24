@@ -28,7 +28,7 @@ namespace EmployeesDepartmentsAPI.Controllers
         public async Task<ActionResult<ICollection<DepartmentDto>>> GetDepartments()
         {
             var departments = await _departmentRepo.GetDepartmentsAsync();
-            var departmentsDto = _mapper.Map<ICollection<DepartmentDto>>(departments).ToList();
+            var departmentsDto = _mapper.Map<List<DepartmentDto>>(departments).ToList();
 
             return Ok(departmentsDto);
         }

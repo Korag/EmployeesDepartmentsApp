@@ -81,7 +81,7 @@ namespace EmployeesDepartmentsAPI.Controllers
             var departmentEmployees = await _departmentEmployeeRepo.GetEmployeesByDepartmentIdAsync(id);
 
             var departmentEmployeesDto = _mapper.Map<DepartmentEmployeesDto>(department);
-            departmentEmployeesDto.Employees = _mapper.Map<ICollection<EmployeeDto>>(departmentEmployeesDto);
+            departmentEmployeesDto.Employees = _mapper.Map<ICollection<EmployeeDto>>(departmentEmployees);
 
             return Ok(departmentEmployeesDto);
         }

@@ -1,5 +1,6 @@
 using EmployeesDepartments.DataAccess;
 using EmployeesDepartments.DataAccess.Repositories;
+using EmployeesDepartmentsAPI.Library.DataTransferObjects;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,8 +41,6 @@ namespace EmployeesDepartmentsTestProject
                                   });
             });
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             #region Dapper
 
             //services.AddScoped<DapperDbContext>(provider => new DapperDbContext("parameterString", ActivatorUtilities.CreateInstance<IConfiguration>(provider, "")));
@@ -61,6 +60,9 @@ namespace EmployeesDepartmentsTestProject
             services.AddTransient<IDepartmentEmployeeRepository, EFDepartmentEmployeeRepository>();
 
             #endregion
+
+            AppDomain.CurrentDomain.Load("EmployeesDepartmentsAPI.Library");
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

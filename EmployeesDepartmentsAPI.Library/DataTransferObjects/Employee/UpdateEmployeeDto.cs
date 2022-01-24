@@ -36,7 +36,7 @@ namespace EmployeesDepartmentsAPI.Library.DataTransferObjects
         [Required]
         [StringLength(1)]
         [DataType(DataType.Text)]
-        public char Sex { get; set; }
+        public string Sex { get; set; }
 
         public UpdateEmployeeDto()
         {
