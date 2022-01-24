@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmployeesDepartments.DataAccess\EmployeesDepartments.DataAccess.csproj" />
+    <ProjectReference Include="..\EmployeesDepartmentsAPI.Library\EmployeesDepartmentsAPI.Library.csproj" />
   </ItemGroup>
 
 </Project>
