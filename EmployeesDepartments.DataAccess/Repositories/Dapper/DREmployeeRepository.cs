@@ -16,7 +16,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public async Task<int> AddEmployeeAsync(EmployeeModel newEmployee)
         {
-            return await _context.SaveDataGetId<EmployeeModel>("dbo.spEmployee_Insert", newEmployee);
+            return await _context.SaveDataGetId("dbo.spEmployee_Insert", new { firstName = newEmployee.FirstName, lastName = newEmployee.LastName, emailAddress = newEmployee.EmailAddress, age = newEmployee.Age, role = newEmployee.Role, sex = newEmployee.Sex  });
         }
 
         public bool CheckIfEmployeeExist(int employeeId)
@@ -49,7 +49,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
             foreach (var employeeId in employeesIds)
             {
-                var result = await _context.LoadData<EmployeeModel, dynamic>("dbo.spEmployee_Get", new { });
+                var result = await _context.LoadData<EmployeeModel, dynamic>("dbo.spEmployee_Get", new { employeeId = employeeId });
                 var employee = result.ToList().FirstOrDefault();
 
                 if (employee != null)
@@ -63,12 +63,12 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public void RemoveEmployee(EmployeeModel employee)
         {
-            _context.SaveData("dbo.spEmployee_Remove", new { employeeId = employee.EmployeeId });
+            _context.SaveData("dbo.spEmployee_Delete", new { employeeId = employee.EmployeeId });
         }
 
         public void UpdateEmployee(EmployeeModel updatedEmployee)
         {
-             _context.SaveData<EmployeeModel>("dbo.spEmployee_Update", updatedEmployee);
+            _context.SaveData("dbo.spEmployee_Update", new { employeeId = updatedEmployee.EmployeeId, firstName = updatedEmployee.FirstName, lastName = updatedEmployee.LastName, emailAddress = updatedEmployee.EmailAddress, age = updatedEmployee.Age, role = updatedEmployee.Role, sex = updatedEmployee.Sex });
         }
     }
 }

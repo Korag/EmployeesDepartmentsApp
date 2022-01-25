@@ -44,20 +44,20 @@ namespace EmployeesDepartmentsTestProject
             #region Dapper
 
             //services.AddScoped<DapperDbContext>(provider => new DapperDbContext("parameterString", ActivatorUtilities.CreateInstance<IConfiguration>(provider, "")));
-            //services.AddScoped<DapperDbContext>();
+            services.AddScoped<IDapperDbContext, DapperDbContext>();
 
-            //services.AddTransient<IEmployeeRepository, DREmployeeRepository>();
-            //services.AddTransient<IDepartmentRepository, DRDepartmentRepository>();
-            //services.AddTransient<IDepartmentEmployeeRepository, DRDepartmentEmployeeRepository>();
+            services.AddTransient<IEmployeeRepository, DREmployeeRepository>();
+            services.AddTransient<IDepartmentRepository, DRDepartmentRepository>();
+            services.AddTransient<IDepartmentEmployeeRepository, DRDepartmentEmployeeRepository>();
 
             #endregion
 
             #region EF
 
-            services.AddDbContext<EFDbContext>();
-            services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
-            services.AddTransient<IDepartmentRepository, EFDepartmentRepository>();
-            services.AddTransient<IDepartmentEmployeeRepository, EFDepartmentEmployeeRepository>();
+            //services.AddDbContext<EFDbContext>();
+            //services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
+            //services.AddTransient<IDepartmentRepository, EFDepartmentRepository>();
+            //services.AddTransient<IDepartmentEmployeeRepository, EFDepartmentEmployeeRepository>();
 
             #endregion
 

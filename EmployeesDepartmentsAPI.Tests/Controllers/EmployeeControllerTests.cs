@@ -65,7 +65,3 @@ namespace EmployeesDepartmentsAPI.Tests.Controllers
         }
     }
 }
-
-
-//ADD REPO TEST
-//ADD CLASS TEST

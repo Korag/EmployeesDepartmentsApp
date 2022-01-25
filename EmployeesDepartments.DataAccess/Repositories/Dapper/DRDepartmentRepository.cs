@@ -17,7 +17,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public async Task<int> AddDepartmentAsync(DepartmentModel newDepartment)
         {
-            return await _context.SaveDataGetId<DepartmentModel>("dbo.spDepartment_Insert", newDepartment);
+            return await _context.SaveDataGetId("dbo.spDepartment_Insert", new { name = newDepartment.Name });
         }
 
         public bool CheckIfDepartmentExist(int departmentId)
@@ -50,7 +50,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
             foreach (var departmentId in departmentsIds)
             {
-                var result = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartment_Get", new { });
+                var result = await _context.LoadData<DepartmentModel, dynamic>("dbo.spDepartment_Get", new { departmentId = departmentId });
                 var department = result.ToList().FirstOrDefault();
 
                 if (department != null)
@@ -64,12 +64,12 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public void RemoveDepartment(DepartmentModel department)
         {
-            _context.SaveData("dbo.spDepartment_Remove", new { departmentId = department.DepartmentId });
+            _context.SaveData("dbo.spDepartment_Delete", new { departmentId = department.DepartmentId });
         }
 
         public void UpdateDepartment(DepartmentModel updatedDepartment)
         {
-            _context.SaveData<DepartmentModel>("dbo.spDepartment_Update", updatedDepartment);
+            _context.SaveData("dbo.spDepartment_Update", new { departmentId = updatedDepartment.DepartmentId, name = updatedDepartment.Name } );
         }
     }
 }

@@ -4,4 +4,5 @@ AS
 BEGIN
 	INSERT INTO [dbo].[Departments] (Name)
 	VALUES (@Name)
+	SELECT @@IDENTITY
 END

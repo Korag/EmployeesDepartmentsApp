@@ -17,7 +17,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public void AssignEmployeeToDepartment(DepartmentEmployeeModel departmentEmployee)
         {
-            _context.SaveData<DepartmentEmployeeModel>("dbo.spDepartmentEmployee_Insert", departmentEmployee);
+            _context.SaveData("dbo.spDepartmentEmployee_Insert", new { employeeId = departmentEmployee.EmployeeId, departmentId = departmentEmployee.DepartmentId });
         }
 
         public bool CheckIfUserBelongsToDepartment(int employeeId, int departmentId)
@@ -48,7 +48,7 @@ namespace EmployeesDepartments.DataAccess.Repositories
 
         public void RemoveEmployeeFromDepartment(DepartmentEmployeeModel departmentEmployee)
         {
-            _context.SaveData<DepartmentEmployeeModel>("dbo.spDepartmentEmployee_Delete", departmentEmployee);
+            _context.SaveData("dbo.spDepartmentEmployee_Delete", new { employeeId = departmentEmployee.EmployeeId, departmentId = departmentEmployee.DepartmentId });
         }
     }
 }

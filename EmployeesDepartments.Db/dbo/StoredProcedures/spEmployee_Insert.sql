@@ -9,4 +9,5 @@ AS
 BEGIN
 	INSERT INTO [dbo].[Employees] (FirstName, LastName, EmailAddress, Age, Role, Sex)
     VALUES (@FirstName, @LastName, @EmailAddress, @Age, @Role, @Sex)
+    SELECT @@IDENTITY
 END
