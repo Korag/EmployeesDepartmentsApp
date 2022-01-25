@@ -1,0 +1,74 @@
+<div class="modal-body p-4 text-center">
+    <h5 class="mb-4">Create employee</h5>
+
+    <form [formGroup]="createEmployeeForm" (ngSubmit)="addNewEmployee()">
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="firstName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+            <label for="floatingInput">First name</label>
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.firstName.errors.required">First name is required</div>
+                <div *ngIf="f.firstName.errors.minlength || f.firstName.errors.maxlength">First name must be between 2 and 100
+                    characters long</div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="lastName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <label for="floatingInput">Last name</label>
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.lastName.errors.required">Last name is required</div>
+                <div *ngIf="f.lastName.errors.minlength || f.lastName.errors.maxlength">Last name must be between 2 and 100
+                    characters long</div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="emailAddress" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" />
+            <label for="floatingInput">Email address</label>
+            <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
+                <div *ngIf="f.emailAddress.errors.email">Email address is not a valid email</div>
+                <div *ngIf="f.emailAddress.errors.minlength || f.emailAddress.errors.maxlength">Email address must be between 2 and 100
+                    characters long</div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="age" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+            <label for="floatingInput">Age</label>
+            <div *ngIf="submitted && f.age.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.age.errors.required">Age is required</div>
+                <div *ngIf="f.age.errors.min || f.age.errors.max">Age must be between 1 and 120</div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="role" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.role.errors }" />
+            <label for="floatingInput">Role</label>
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.role.errors.required">Role is required</div>
+                <div *ngIf="f.role.errors.minlength || f.role.errors.maxlength">Role must be between 2 and 100
+                    characters long</div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="sex" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.sex.errors }" />
+            <label for="floatingInput">Sex</label>
+            <div *ngIf="submitted && f.sex.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.sex.errors.required">Role is required</div>
+                <div *ngIf="f.sex.errors.minlength || f.sex.errors.maxlength">Sex must be a single char</div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer flex-nowrap p-0">
+    <button [disabled]="loading" class="btn btn-lg btn-grad-sec fs-6 text-decoration-none col-6 m-0 rounded-0"
+        (click)="addNewEmployee()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        <strong>Create</strong>
+    </button>
+    <button [disabled]="loading" class="btn btn-lg btn-grad-th fs-6 text-decoration-none col-6 m-0 rounded-0"
+        (click)="closeModal()"><strong>Cancel</strong></button>
+</div>

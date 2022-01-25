@@ -35,7 +35,8 @@ namespace EmployeesDepartmentsTestProject
                 options.AddPolicy(name: Configuration.GetValue<string>("CORS:Name"),
                                   builder =>
                                   {
-                                      builder.WithOrigins(Configuration.GetSection("CORS").GetSection("AllowedOrigins").Get<string[]>())
+                                      builder.AllowAnyOrigin()
+                                      //builder.WithOrigins(Configuration.GetSection("CORS").GetSection("AllowedOrigins").Get<string[]>())
                                              .AllowAnyHeader()
                                              .AllowAnyMethod();
                                   });
@@ -68,6 +69,8 @@ namespace EmployeesDepartmentsTestProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(Configuration.GetValue<string>("CORS:Name"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,8 +88,6 @@ namespace EmployeesDepartmentsTestProject
             {
                 endpoints.MapControllers();
             });
-
-            app.UseCors(Configuration.GetValue<string>("CORS:Name"));
         }
     }
 }

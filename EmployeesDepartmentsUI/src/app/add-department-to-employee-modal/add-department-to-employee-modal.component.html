@@ -1,0 +1,21 @@
+<div class="modal-body p-4 text-center">
+    <h5 class="mb-4">Add department to Employee</h5>
+
+    <form [formGroup]="addDepartmentToEmployeeForm" (ngSubmit)="addDepartmentToEmployee()">
+      <div class="form-floating mb-3">
+
+        <select class="custom-select" formControlName="departmentId">
+            <option value="" disabled>Choose available department</option>
+            <option *ngFor="let department of departments" [ngValue]="department.departmentId">{{department.name}}</option>
+         </select>
+
+    </div>
+    </form>
+  </div>
+  <div class="modal-footer flex-nowrap p-0">
+    <button [disabled]="loading" class="btn btn-lg btn-grad-sec fs-6 text-decoration-none col-6 m-0 rounded-0" (click)="addDepartmentToEmployee()">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      <strong>Add</strong>
+    </button>
+    <button [disabled]="loading" class="btn btn-lg btn-grad-th fs-6 text-decoration-none col-6 m-0 rounded-0" (click)="closeModal()"><strong>Cancel</strong></button>
+  </div>
